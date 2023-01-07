@@ -2,16 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Resource : MonoBehaviour
+[CreateAssetMenu(menuName = "Resource")]
+public class Resource : ScriptableObject
 {
-    
-    void Start()
-    {
-        
-    }
+    public string resourceName = "Resource";
+    public Sprite resourceImage;
+    public bool isInfiniteResource = false;
+    [Tooltip("Max amount if it's not infinite")]
+    public int maxResourceAmount = 100;
 
-    void Update()
-    {
-        
-    }
+    [Header("Harvesting")] 
+    [Tooltip("Time to harvest in seconds")]
+    public int harvestTime = 1;
+    [Tooltip("Resource given on every harvest")]
+    public int resourcePerHarvest = 5;
 }
