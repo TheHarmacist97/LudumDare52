@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using MoreMountains.InventoryEngine;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Resource")]
-public class Resource : ScriptableObject
+public class Resource : InventoryItem
 {
-    public string resourceName = "Resource";
-    public Sprite resourceImage;
+    [Header("Resource Properties")]
     public bool isInfiniteResource = false;
     [Tooltip("Max amount if it's not infinite")]
     public int maxResourceAmount = 100;

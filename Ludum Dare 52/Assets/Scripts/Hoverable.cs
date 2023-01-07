@@ -18,18 +18,19 @@ public class Hoverable : MonoBehaviour
         OnMouseExitFunc();
     }
 
+    private void OnMouseDown()
+    {
+        OnMouseClick();
+    }
+
     protected virtual string GetTooltipString()
     {
         return "Tooltip";
     }
     
-    protected virtual void OnMouseEnterFunc()
-    {
-        
-    }
+    protected virtual void OnMouseEnterFunc() { }
     
-    protected virtual void OnMouseExitFunc()
-    {
-        
-    }
+    protected virtual void OnMouseExitFunc() { }
+    
+    protected virtual void OnMouseClick() { }
 }

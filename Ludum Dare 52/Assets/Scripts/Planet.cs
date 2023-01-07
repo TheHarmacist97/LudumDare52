@@ -9,22 +9,27 @@ public class Planet : Hoverable
     [SerializeField] private Resource excessResource;
     [SerializeField] private float outlineWidth = 2f;
 
+    private string _tooltipText;
     private Material _planetMat;
 
     private void Start()
     {
         _planetMat = GetComponentInChildren<SpriteRenderer>().material;
+        _tooltipText = "Planet Name: <color=\"yellow\">" + planetName + "</color>\n" + "Primary Resource: <color=\"yellow\">" + excessResource.ItemName + "</color>";
     }
 
     protected override string GetTooltipString()
     {
-        string text = "Planet Name: " + planetName + "\n";
-        text += "Primary Resource: " + excessResource.resourceName;
-        return text;
+        if (PlanetManager.instance.SelectedPlanet == this)
+        {
+            return "<b>YOU ARE HERE</b>\n" + _tooltipText;
+        }
+        return _tooltipText;
     }
 
     protected override void OnMouseEnterFunc()
     {
+        
         _planetMat.SetFloat("_OutlinePixelWidth", outlineWidth);
         _planetMat.SetFloat("_Glow", 1f);
     }
@@ -33,5 +38,18 @@ public class Planet : Hoverable
     {
         _planetMat.SetFloat("_OutlinePixelWidth", 0f);
         _planetMat.SetFloat("_Glow", 0f);
+    }
+
+    protected override void OnMouseClick()
+    {
+        if (PlanetManager.instance.SelectedPlanet == null)
+        {
+            PlanetManager.instance.SelectPlanet(this);
+            SceneSwitcher.instance.SwitchScene(SceneSwitcher.ScenesEnum.Planet);
+        }
+        else if (PlanetManager.instance.SelectedPlanet == this)
+        {
+            SceneSwitcher.instance.SwitchScene(SceneSwitcher.ScenesEnum.Planet);
+        }
     }
 }
