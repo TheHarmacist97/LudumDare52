@@ -18,9 +18,18 @@ public class ResourceSpawner : MonoBehaviour
         DayNightSystem.instance.onDayStartedEvent.AddListener(RepopulateResources);
         grid = GridCreator.instance.grid;
     }
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.K))
+        {
+            RepopulateResources();
+        }
+    }
 
     public void RepopulateResources()
     {
+        DestroyChildren();
+
         sessionPlanetResource = PlanetManager.instance.SelectedPlanet.excessResource;
         uniqueresource = sessionPlanetResource.Prefab.GetComponent<HarvestableResource>();
         foreach (CellObject cell in grid.cellValues)
@@ -30,6 +39,14 @@ public class ResourceSpawner : MonoBehaviour
                 cell.occupied = true;
                 Instantiate(RandomizeResource(), cell.transform.position, Quaternion.identity).transform.parent = transform;
             }
+        }
+    }
+
+    private void DestroyChildren()
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            Destroy(transform.GetChild(i).gameObject);
         }
     }
 
