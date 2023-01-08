@@ -11,7 +11,7 @@ public class RequiredResource
 }
 
 [CreateAssetMenu(menuName = "Craftable Item")]
-public class CraftableItem : ScriptableObject
+public class CraftableItemSO : ScriptableObject
 {
     public string itemName = "Item";
     public Sprite itemSprite;

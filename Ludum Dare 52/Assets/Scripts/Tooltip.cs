@@ -66,7 +66,7 @@ public class Tooltip : MonoBehaviour
         gameObject.SetActive(true);
         transform.SetAsLastSibling();
         this.getTooltipStringFunc = getTooltipStringFunc;
-        SetText(getTooltipStringFunc());
+        Update();
     }
 
     private void SetText(string text)
