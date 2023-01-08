@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class GridSystem
@@ -7,60 +6,71 @@ public class GridSystem
     int width;
     int height;
     float cellSize;
-    int[,] cellValues;
+    CellObject[,] cellValues;
+    Vector2 origPos;
 
-    public GridSystem(int width, int height, float cellSize)
+    public GridSystem(int width, int height, float cellSize, Vector2 originPosition, Func<Vector2, CellObject> CreateCell)
     {
-        this.width = width/2;
-        this.height = height/2;
+        this.width = width;
+        this.height = height;
         this.cellSize = cellSize;
-        cellValues = new int[width, height];
-
-        for (int i = -width; i < width; i++)
+        origPos = originPosition;
+        cellValues = new CellObject[width, height];
+        for (int i = 0; i < width; i++)
         {
-            for (int j = -height; j < height; j++)
+            for (int j = 0; j < height; j++)
             {
-                Debug.DrawLine(GetWorldPosition(i, j), GetWorldPosition(i, j+1), Color.red, 100f);
-                Debug.DrawLine(GetWorldPosition(i, j), GetWorldPosition(i+1, j), Color.cyan, 100f);
+                cellValues[i, j] = CreateCell(GetWorldPosition(i, j));
+
             }
         }
-        Debug.DrawLine(GetWorldPosition(-width, height), GetWorldPosition(width, height), Color.red, 100f);
-        Debug.DrawLine(GetWorldPosition(width, -height), GetWorldPosition(width, height), Color.cyan, 100f);
+
+        for (int i = 0; i < width; i++)
+        {
+            for (int j = 0; j < height; j++)
+            {
+                Debug.DrawLine(GetWorldPosition(i, j), GetWorldPosition(i, j + 1), Color.red, 100f);
+                Debug.DrawLine(GetWorldPosition(i, j), GetWorldPosition(i + 1, j), Color.cyan, 100f);
+
+            }
+        }
+        Debug.DrawLine(GetWorldPosition(0, height), GetWorldPosition(width, height), Color.red, 100f);
+        Debug.DrawLine(GetWorldPosition(width, 0), GetWorldPosition(width, height), Color.cyan, 100f);
     }
 
-    public Vector3 GetWorldPosition(int x, int y)
+    public Vector2 GetWorldPosition(int x, int y)
     {
-        return new Vector3(x, y)* cellSize;
+        return new Vector2(x, y) * cellSize + origPos;
     }
-    public Vector2Int GetCellIndice(Vector2 worldPos)
+    public Vector2Int GetCellIndex(Vector2 worldPos)
     {
-        return new Vector2Int(Mathf.FloorToInt(worldPos.x/cellSize), Mathf.FloorToInt(worldPos.y/cellSize)); 
+        return new Vector2Int(Mathf.FloorToInt((worldPos - origPos).x / cellSize), Mathf.FloorToInt((worldPos - origPos).y / cellSize));
     }
 
-    public void SetValue(int x, int y, int value)
+    public void SetValue(int x, int y)
     {
         if (x < 0 || y < 0) return;
         if (x > width || y > height) return;
 
-        cellValues[x,y] = value;
+        cellValues[x, y].OnClick();
     }
 
-    public void SetValue(Vector2 worldPos, int value)
+    public void SetValue(Vector2 worldPos)
     {
-        Vector2Int cellIndex = GetCellIndice(worldPos);
-        SetValue(cellIndex.x, cellIndex.y, value);
+        Vector2Int cellIndex = GetCellIndex(worldPos);
+        SetValue(cellIndex.x, cellIndex.y);
     }
 
-    public int GetValue(Vector2 worldPos)
+    public CellObject GetValue(Vector2 worldPos)
     {
-        Vector2Int cellIndex = GetCellIndice(worldPos);
+        Vector2Int cellIndex = GetCellIndex(worldPos);
         return GetValue(cellIndex.x, cellIndex.y);
     }
-    
-    public int GetValue(int x, int y)
+
+    public CellObject GetValue(int x, int y)
     {
-        if (x < 0 || y < 0) return 0;
-        if (x > width || y > height) return 0;
+        if (x < 0 || y < 0) return default;
+        if (x > width || y > height) return default;
 
         return cellValues[x, y];
     }
