@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.42745098, g: 0.5294118, b: 0.4509804, a: 0.48235294}
+  m_Color: {r: 0.34080952, g: 0.7830189, b: 0.32798147, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -97,7 +97,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41e6041b2cd248144acb98a515381bf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unselectedColor: {r: 0.4256319, g: 0.5283019, b: 0.4512994, a: 0.48235294}
-  hoverColor: {r: 0.52475965, g: 0.8773585, b: 0.5867027, a: 1}
-  clickColor: {r: 0.59918314, g: 0.8773585, b: 0.52475965, a: 1}
-  spriteRen: {fileID: 2882869808237461793}
+  occupied: 0

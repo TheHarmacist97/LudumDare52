@@ -6,36 +6,40 @@ public class GridSystem
     int width;
     int height;
     float cellSize;
+    bool debug;
     CellObject[,] cellValues;
     Vector2 origPos;
 
-    public GridSystem(int width, int height, float cellSize, Vector2 originPosition, Func<Vector2, CellObject> CreateCell)
+    public GridSystem(int width, int height, float cellSize, Vector2 originPosition, Func<Vector2, CellObject> CreateCell, bool debug)
     {
         this.width = width;
         this.height = height;
         this.cellSize = cellSize;
+        this.debug = debug;
         origPos = originPosition;
         cellValues = new CellObject[width, height];
+
         for (int i = 0; i < width; i++)
         {
             for (int j = 0; j < height; j++)
             {
                 cellValues[i, j] = CreateCell(GetWorldPosition(i, j));
-
             }
         }
-
-        for (int i = 0; i < width; i++)
+        if(debug)
         {
-            for (int j = 0; j < height; j++)
+            for (int i = 0; i < width; i++)
             {
-                Debug.DrawLine(GetWorldPosition(i, j), GetWorldPosition(i, j + 1), Color.red, 100f);
-                Debug.DrawLine(GetWorldPosition(i, j), GetWorldPosition(i + 1, j), Color.cyan, 100f);
+                for (int j = 0; j < height; j++)
+                {
+                    Debug.DrawLine(GetWorldPosition(i, j), GetWorldPosition(i, j + 1), Color.red, 100f);
+                    Debug.DrawLine(GetWorldPosition(i, j), GetWorldPosition(i + 1, j), Color.cyan, 100f);
 
+                }
             }
+            Debug.DrawLine(GetWorldPosition(0, height), GetWorldPosition(width, height), Color.red, 100f);
+            Debug.DrawLine(GetWorldPosition(width, 0), GetWorldPosition(width, height), Color.cyan, 100f);
         }
-        Debug.DrawLine(GetWorldPosition(0, height), GetWorldPosition(width, height), Color.red, 100f);
-        Debug.DrawLine(GetWorldPosition(width, 0), GetWorldPosition(width, height), Color.cyan, 100f);
     }
 
     public Vector2 GetWorldPosition(int x, int y)
@@ -52,7 +56,7 @@ public class GridSystem
         if (x < 0 || y < 0) return;
         if (x > width || y > height) return;
 
-        cellValues[x, y].OnClick();
+        //cellValues[x, y].OnClick();
     }
 
     public void SetValue(Vector2 worldPos)
