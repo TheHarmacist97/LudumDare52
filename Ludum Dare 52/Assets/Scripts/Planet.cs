@@ -13,7 +13,7 @@ public class Planet : Hoverable
         Harvesting
     }
     [SerializeField] private string planetName = "Planet";
-    [SerializeField] private Resource excessResource;
+    public Resource excessResource;
     [SerializeField] private float outlineWidth = 2f;
 
     [Header("Planet Harvester properties")]
