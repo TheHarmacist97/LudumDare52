@@ -88,5 +88,5 @@ MonoBehaviour:
   UseDefaultSoundsIfNull: 1
   isInfiniteResource: 1
   maxResourceAmount: 100
-  harvestTime: 3
+  harvestTime: 1
   resourcePerHarvest: 15

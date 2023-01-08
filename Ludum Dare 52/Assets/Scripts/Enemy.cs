@@ -1,18 +1,21 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using CodeMonkey.HealthSystemCM;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    private GridSystem grid;
+    private HealthSystem _healthSystem;
     void Start()
     {
-        grid = GridCreator.instance.grid;       
+        _healthSystem = GetComponent<HealthSystemComponent>().GetHealthSystem();
+        _healthSystem.OnDead += OnDead;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDead(object data, EventArgs args)
     {
-        
+        Debug.Log(gameObject.name + " died");
+        Destroy(gameObject);
     }
 }

@@ -80,6 +80,8 @@ public class TooltipWarning : MonoBehaviour
                     backgroundImage.color = Color.white;
                     break;
             }
+
+            flashTimer = 0f;
         }
         showTimer -= Time.deltaTime;
         if (showTimer <= 0f)

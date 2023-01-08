@@ -5,12 +5,25 @@ using UnityEngine;
 
 public class Planet : Hoverable
 {
+    public enum PlanetState
+    {
+        Default,
+        Active, 
+        Harvestable,
+        Harvesting
+    }
     [SerializeField] private string planetName = "Planet";
     [SerializeField] private Resource excessResource;
     [SerializeField] private float outlineWidth = 2f;
 
+    [Header("Planet Harvester properties")]
+    [SerializeField] private int harvestPerSecond = 1;
+    [SerializeField] private int maxStoredAmount = 200;
+    [SerializeField] private GameObject harvesterVisual;
+
     private string _tooltipText;
     private Material _planetMat;
+    private PlanetState _state = PlanetState.Default;
 
     private void Start()
     {
@@ -45,6 +58,7 @@ public class Planet : Hoverable
         if (PlanetManager.instance.SelectedPlanet == null)
         {
             PlanetManager.instance.SelectPlanet(this);
+            _state = PlanetState.Active;
             SceneSwitcher.instance.SwitchScene(SceneSwitcher.ScenesEnum.Planet);
         }
         else if (PlanetManager.instance.SelectedPlanet == this)

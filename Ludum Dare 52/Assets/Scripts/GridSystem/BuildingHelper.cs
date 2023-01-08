@@ -13,6 +13,7 @@ public class BuildingHelper : MonoBehaviour
     private States state = States.INACTIVE;
 
     private Building currentBuilding;
+    private CraftableItemSO _currentCraftableItem;
     private CellObject currentCellObject;
     GridSystem grid;
 
@@ -33,9 +34,10 @@ public class BuildingHelper : MonoBehaviour
         StateLogic();
     }
 
-    public void InitiateBuilding(Building building)
+    public void InitiateBuilding(CraftableItemSO craftableItem)
     {
-        currentBuilding = Instantiate(building, UtilsClass.GetMouseWorldPosition(), Quaternion.identity);
+        _currentCraftableItem = craftableItem;
+        currentBuilding = Instantiate(craftableItem.itemPrefab, UtilsClass.GetMouseWorldPosition(), Quaternion.identity);
         state = States.SAMPLING;
     }
 
@@ -62,6 +64,23 @@ public class BuildingHelper : MonoBehaviour
             if (Input.GetMouseButtonDown(0) && !currentCellObject.occupied)
             {
                 //AstarPath.active.Scan();
+                // Deduct resources from inventory
+                bool hasEnoughResources = true;
+                foreach (var requiredResource in _currentCraftableItem.requiredResources)
+                {
+                    if (!InventoryManager.instance.InventoryContains(requiredResource.resource,
+                            requiredResource.requiredAmount))
+                    {
+                        TooltipWarning.ShowTooltip_Static(() => "Not Enough Resources!");
+                        hasEnoughResources = false;
+                        return;
+                    }
+                }
+
+                foreach (var requiredResource in _currentCraftableItem.requiredResources)
+                {
+                    InventoryManager.instance.RemoveFromInventory(requiredResource.resource, requiredResource.requiredAmount);
+                }
                 currentBuilding.transform.position = currentCellObject.transform.position;
                 currentBuilding.ChangeConstructionState(ConstructionState.BUILT);
                 currentCellObject.occupied = true;
@@ -69,7 +88,9 @@ public class BuildingHelper : MonoBehaviour
             }
             else if (Input.GetKeyDown(KeyCode.Escape))
             {
+                _currentCraftableItem = null;
                 Destroy(currentBuilding.gameObject);
+                currentBuilding = null;
                 state = States.INACTIVE;
             }
         }

@@ -55,7 +55,7 @@ public class CraftableItemBtn : MonoBehaviour
 
     private void CraftItem()
     {
-        BuildingHelper.instance.InitiateBuilding(_craftableItem.itemPrefab);
+        BuildingHelper.instance.InitiateBuilding(_craftableItem);
     }
     
     private string GetTooltipString()
