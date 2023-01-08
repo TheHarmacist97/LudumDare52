@@ -8,6 +8,7 @@ using UnityEngine.Events;
 
 public class DayNightSystem : MonoBehaviour
 {
+    public static DayNightSystem instance;
     public enum GamePhaseEnum
     {
         Day,
@@ -19,14 +20,24 @@ public class DayNightSystem : MonoBehaviour
     [SerializeField] private GameObject timeUpPanel;
     [SerializeField] private TextMeshProUGUI timerText;
     [Header("Events")] 
-    [SerializeField] private UnityEvent onDayStartedEvent;
+    public UnityEvent onDayStartedEvent;
     [SerializeField] private UnityEvent onNightStartedEvent;
 
     private GamePhaseEnum _currentGamePhase;
     private bool _timerStarted = false;
     private float _dayTimer;
 
-
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this && instance != null)
+        {
+            Destroy(gameObject);
+        }
+    }
     private void Start()
     {
         ResetTimer();

@@ -36,7 +36,7 @@ MonoBehaviour:
   ShortDescription: It's Coal
   Description: It's Coal
   Icon: {fileID: 21300002, guid: 678058abcbfe36f42902c11d9e5f64fc, type: 3}
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 1766785643802516283, guid: a10f09f9c44ea7c4eaadb1f9bd111da6, type: 3}
   DropProperties:
     Shape: 0
     NormalToSpawnPlane: {x: 0, y: 1, z: 0}

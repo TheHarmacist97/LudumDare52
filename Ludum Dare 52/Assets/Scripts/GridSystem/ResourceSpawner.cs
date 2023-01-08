@@ -6,30 +6,47 @@ using SupanthaPaul;
 
 public class ResourceSpawner : MonoBehaviour
 {
-    [SerializeField] List<Resource> resources;
-    [SerializeField] HarvestableResource resource;
-    [SerializeField, Range(0,50f)] float spawnRate;
+    [SerializeField] private HarvestableResource commonResource1, commonResource2;
+    private HarvestableResource uniqueresource;
+    [SerializeField, Range(0,50f)] private float spawnRate;
 
     private GridSystem grid;
-    Planet sessionPlanet;
+    Resource sessionPlanetResource;
     // Start is called before the first frame update
     void Start()
     {
-
+        DayNightSystem.instance.onDayStartedEvent.AddListener(RepopulateResources);
         grid = GridCreator.instance.grid;
-        //RepopulateResources();
     }
 
     public void RepopulateResources()
     {
-        sessionPlanet = PlanetManager.instance.SelectedPlanet;
-        foreach(CellObject cell in grid.cellValues)
+        sessionPlanetResource = PlanetManager.instance.SelectedPlanet.excessResource;
+        uniqueresource = sessionPlanetResource.Prefab.GetComponent<HarvestableResource>();
+        foreach (CellObject cell in grid.cellValues)
         {
             if(Random.Range(0,100)<spawnRate)
             {
                 cell.occupied = true;
-                Instantiate(resource, cell.transform.position, Quaternion.identity).transform.parent = transform;
+                Instantiate(RandomizeResource(), cell.transform.position, Quaternion.identity).transform.parent = transform;
             }
+        }
+    }
+
+    public HarvestableResource RandomizeResource()
+    {
+        int random = Mathf.CeilToInt(Random.Range(0f, 3f));
+        if ( random > 2)
+        {
+            return commonResource1;
+        }
+        else if(random>1)
+        {
+            return commonResource2;
+        }    
+        else
+        {
+            return uniqueresource;
         }
     }
 }
