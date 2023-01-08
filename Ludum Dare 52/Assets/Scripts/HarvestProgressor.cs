@@ -25,6 +25,8 @@ public class HarvestProgressor : MonoBehaviour
 
     public void HideProgressor()
     {
+        if (_canvasGroup == null)
+            _canvasGroup = GetComponent<CanvasGroup>();
         _canvasGroup.alpha = 0f;
     }
     
