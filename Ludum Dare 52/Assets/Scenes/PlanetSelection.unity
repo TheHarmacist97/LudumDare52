@@ -1787,7 +1787,7 @@ MonoBehaviour:
   excessResource: {fileID: 11400000, guid: b102c25f631276e4b9609de758e2b320, type: 2}
   outlineWidth: 2
   requiredResources:
-  - resource: {fileID: 11400000, guid: b102c25f631276e4b9609de758e2b320, type: 2}
+  - resource: {fileID: 11400000, guid: edb768dac5c79914cadf243b1827a98f, type: 2}
     requiredAmount: 15
   harvestTime: 10
   resourcePerHarvest: 10
