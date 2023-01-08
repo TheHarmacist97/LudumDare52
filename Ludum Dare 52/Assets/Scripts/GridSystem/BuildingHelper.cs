@@ -56,6 +56,7 @@ public class BuildingHelper : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0) && !currentCellObject.occupied)
             {
+                AstarPath.active.Scan();
                 currentBuildingPrefab.transform.position = currentCellObject.transform.position;
                 currentBuildingComponent.ChangeConstructionState(ConstructionState.BUILT);
                 currentCellObject.occupied = true;
