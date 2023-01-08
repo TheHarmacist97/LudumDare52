@@ -26,7 +26,10 @@ public class HarvestableResource : Hoverable
 
     private void Update()
     {
-        if (_harvestableAmount <= 0) return;
+        if (_harvestableAmount <= 0)
+        {
+            Destroy(gameObject);
+        };
         
         if (_mouseOver && Input.GetMouseButton(1))
         {
@@ -53,6 +56,11 @@ public class HarvestableResource : Hoverable
             _harvestingTimer = 0f;
             harvestProgressor.HideProgressor();
         }
+    }
+
+    private void OnDestroy()
+    {
+        Tooltip.HideTooltip_Static();
     }
 
     protected override string GetTooltipString()
