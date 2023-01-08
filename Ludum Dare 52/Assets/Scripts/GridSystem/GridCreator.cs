@@ -1,10 +1,12 @@
 using CodeMonkey.Utils;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GridCreator : MonoBehaviour
 {
     public static GridCreator instance;
-    [SerializeField] GameObject cellPrefab;
+    [Header("Prefabs")]
+    [SerializeField] CellObject cellPrefab;
     [SerializeField] private int width, height;
     [SerializeField] private float cellSize;
     public GridSystem grid;
@@ -20,8 +22,9 @@ public class GridCreator : MonoBehaviour
             Destroy(gameObject);
         }
 
+        CellObject.cellSize = cellSize;
         transform.position = new Vector2(-(width / 2) * cellSize, -(height * cellSize / 2));
-        grid = new GridSystem(width, height, cellSize, transform.position, InstantiateCell, false);
+        grid = new GridSystem(width, height, CellObject.cellSize, transform.position, InstantiateCell, false    );
     }
 
     // Start is called before the first frame update
@@ -44,8 +47,9 @@ public class GridCreator : MonoBehaviour
     }
     public CellObject InstantiateCell(Vector2 pos)
     {
-        GameObject cell = Instantiate(cellPrefab, pos + new Vector2(cellSize, cellSize)/2f, Quaternion.identity);
+        Vector2 offset = new Vector2(cellSize, cellSize) / 2f;
+        CellObject cell = Instantiate(cellPrefab, pos + offset, Quaternion.identity);
         cell.transform.parent = transform;
-        return cell.GetComponent<CellObject>();
+        return cell;
     }
 }

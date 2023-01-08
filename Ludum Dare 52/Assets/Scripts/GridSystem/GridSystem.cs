@@ -3,12 +3,12 @@ using UnityEngine;
 
 public class GridSystem
 {
-    int width;
-    int height;
-    float cellSize;
-    bool debug;
-    CellObject[,] cellValues;
-    Vector2 origPos;
+    public int width;
+    public int height;
+    public float cellSize;
+    public bool debug;
+    public CellObject[,] cellValues;
+    public Vector2 origPos;
 
     public GridSystem(int width, int height, float cellSize, Vector2 originPosition, Func<Vector2, CellObject> CreateCell, bool debug)
     {
@@ -26,7 +26,7 @@ public class GridSystem
                 cellValues[i, j] = CreateCell(GetWorldPosition(i, j));
             }
         }
-        if(debug)
+        if (debug)
         {
             for (int i = 0; i < width; i++)
             {

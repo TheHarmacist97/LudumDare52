@@ -31,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8447713063350430458
 MonoBehaviour:
@@ -45,10 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f085be7743f2f16488f518a3fea57155, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cellPrefab: {fileID: 3635455308456495288, guid: 6a899e25577bcc3479c758c256546a6f, type: 3}
-  width: 60
-  height: 60
-  cellSize: 1
+  cellPrefab: {fileID: 6199154718531265374, guid: 6a899e25577bcc3479c758c256546a6f, type: 3}
+  width: 30
+  height: 30
+  cellSize: 2
 --- !u!114 &8447713063350430459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,4 +61,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 008bbd4a06f1fbd45a9fd761e7b6018d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingPrefab: {fileID: 64642648622544184, guid: df2ec25b12ead9f4199ca998ce6ff8dc, type: 3}
