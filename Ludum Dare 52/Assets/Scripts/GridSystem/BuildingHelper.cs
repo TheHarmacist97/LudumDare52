@@ -8,11 +8,10 @@ public class BuildingHelper : MonoBehaviour
         INACTIVE,
         SAMPLING
     }
-    [SerializeField] GameObject buildingPrefab;
+    [SerializeField] Building buildingPrefab;
     private States state = States.INACTIVE;
 
-    private GameObject currentBuildingPrefab;
-    private Building currentBuildingComponent;
+    private Building currentBuilding;
     private CellObject currentCellObject;
     GridSystem grid;
 
@@ -27,8 +26,7 @@ public class BuildingHelper : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            currentBuildingPrefab = Instantiate(buildingPrefab, UtilsClass.GetMouseWorldPosition(), Quaternion.identity);
-            currentBuildingComponent = currentBuildingPrefab.GetComponent<Building>();
+            currentBuilding = Instantiate(buildingPrefab, UtilsClass.GetMouseWorldPosition(), Quaternion.identity);
             state = States.SAMPLING;
         }
         StateLogic();
@@ -40,31 +38,31 @@ public class BuildingHelper : MonoBehaviour
         Vector2 currentMousePos = UtilsClass.GetMouseWorldPosition();
         if (state == States.SAMPLING)
         {
-            currentBuildingPrefab.transform.position = currentMousePos;
+            currentBuilding.transform.position = currentMousePos;
             currentCellObject = grid.GetValue(currentMousePos);
 
             if (currentCellObject.occupied)
             {
-                currentBuildingComponent.ChangeConstructionState(ConstructionState.COLLIDING);
+                currentBuilding.ChangeConstructionState(ConstructionState.COLLIDING);
                 return;
             }
             else
             {
-                currentBuildingComponent.ChangeConstructionState(ConstructionState.BUILDABLE);
+                currentBuilding.ChangeConstructionState(ConstructionState.BUILDABLE);
             }
 
 
             if (Input.GetMouseButtonDown(0) && !currentCellObject.occupied)
             {
                 AstarPath.active.Scan();
-                currentBuildingPrefab.transform.position = currentCellObject.transform.position;
-                currentBuildingComponent.ChangeConstructionState(ConstructionState.BUILT);
+                currentBuilding.transform.position = currentCellObject.transform.position;
+                currentBuilding.ChangeConstructionState(ConstructionState.BUILT);
                 currentCellObject.occupied = true;
                 state = States.INACTIVE;
             }
             else if (Input.GetKeyDown(KeyCode.Escape))
             {
-                Destroy(currentBuildingPrefab);
+                Destroy(currentBuilding.gameObject);
                 state = States.INACTIVE;
             }
         }
