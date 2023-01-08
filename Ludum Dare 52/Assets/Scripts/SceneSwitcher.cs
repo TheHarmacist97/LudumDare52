@@ -45,6 +45,23 @@ public class SceneSwitcher : MonoBehaviour
         StartCoroutine(SwitchToActiveScene());
     }
 
+    public void OnNightStarted()
+    {
+        if (ActiveScene == ScenesEnum.Space)
+        {
+            // we need to go back to planet
+            SwitchScene(ScenesEnum.Planet);
+        }
+        // disable switch to space button
+        backToSpaceBtn.gameObject.SetActive(false);
+    }
+    
+    public void OnDayStarted()
+    {
+        // Enable switch to space button
+        backToSpaceBtn.gameObject.SetActive(true);
+    }
+
     IEnumerator SwitchToActiveScene()
     {
         faderImage.transform.SetAsLastSibling();
