@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 64642648622544191}
   - component: {fileID: 64642648622544184}
   - component: {fileID: 3535889339967704950}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Building2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 64642648622544185}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.6395568, y: 1.3890865, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
