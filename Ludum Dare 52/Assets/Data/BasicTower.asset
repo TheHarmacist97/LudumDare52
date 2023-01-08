@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 70056b24d1ec93040899d1e214c4325f, type: 3}
-  m_Name: ResourceHarvester 1
+  m_Name: BasicTower
   m_EditorClassIdentifier: 
   itemName: Ultimate Tower
   itemSprite: {fileID: 21300010, guid: a1fbd1aaf76d0b94e88551b7c406ee2c, type: 3}
-  itemPrefab: {fileID: 0}
+  itemPrefab: {fileID: -219651473577904422, guid: 2e91fb7f15d784845ab3a3b9a9a4ccb2, type: 3}
   requiredResources:
   - resource: {fileID: 11400000, guid: 8c7a35020978370478bebcda0f1f163e, type: 2}
     requiredAmount: 20

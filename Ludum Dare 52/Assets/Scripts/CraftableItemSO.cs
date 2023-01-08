@@ -15,6 +15,6 @@ public class CraftableItemSO : ScriptableObject
 {
     public string itemName = "Item";
     public Sprite itemSprite;
-    public GameObject itemPrefab;
+    public Building itemPrefab;
     public RequiredResource[] requiredResources;
 }

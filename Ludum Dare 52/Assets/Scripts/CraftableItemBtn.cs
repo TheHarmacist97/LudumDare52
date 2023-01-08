@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -54,7 +55,7 @@ public class CraftableItemBtn : MonoBehaviour
 
     private void CraftItem()
     {
-        
+        BuildingHelper.instance.InitiateBuilding(_craftableItem.itemPrefab);
     }
     
     private string GetTooltipString()

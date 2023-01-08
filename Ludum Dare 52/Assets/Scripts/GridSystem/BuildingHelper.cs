@@ -1,35 +1,42 @@
+using System;
 using CodeMonkey.Utils;
 using UnityEngine;
 
 public class BuildingHelper : MonoBehaviour
 {
+    public static BuildingHelper instance;
     enum States
     {
         INACTIVE,
         SAMPLING
     }
-    [SerializeField] Building buildingPrefab;
     private States state = States.INACTIVE;
 
     private Building currentBuilding;
     private CellObject currentCellObject;
     GridSystem grid;
 
-    // Start is called before the first frame update
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+    }
+
     void Start()
     {
         grid = GridCreator.instance.grid;
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            currentBuilding = Instantiate(buildingPrefab, UtilsClass.GetMouseWorldPosition(), Quaternion.identity);
-            state = States.SAMPLING;
-        }
         StateLogic();
+    }
+
+    public void InitiateBuilding(Building building)
+    {
+        currentBuilding = Instantiate(building, UtilsClass.GetMouseWorldPosition(), Quaternion.identity);
+        state = States.SAMPLING;
     }
 
     private void StateLogic()
@@ -38,8 +45,8 @@ public class BuildingHelper : MonoBehaviour
         Vector2 currentMousePos = UtilsClass.GetMouseWorldPosition();
         if (state == States.SAMPLING)
         {
-            currentBuilding.transform.position = currentMousePos;
             currentCellObject = grid.GetValue(currentMousePos);
+            currentBuilding.transform.position = currentCellObject.transform.position;
 
             if (currentCellObject.occupied)
             {
@@ -54,7 +61,7 @@ public class BuildingHelper : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0) && !currentCellObject.occupied)
             {
-                AstarPath.active.Scan();
+                //AstarPath.active.Scan();
                 currentBuilding.transform.position = currentCellObject.transform.position;
                 currentBuilding.ChangeConstructionState(ConstructionState.BUILT);
                 currentCellObject.occupied = true;

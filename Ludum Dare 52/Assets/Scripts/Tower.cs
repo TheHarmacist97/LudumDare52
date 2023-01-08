@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+[RequireComponent(typeof(Building))]
 public class Tower : MonoBehaviour
 {
     [SerializeField] private Transform turretTransform;
@@ -17,8 +18,18 @@ public class Tower : MonoBehaviour
 
     private float _nextFire = 0f;
     private Collider2D[] _enemiesInRange;
+    private Building _building;
+
+    private void Start()
+    {
+        _building = GetComponent<Building>();
+    }
+
     void Update()
     {
+        if (_building.GetConstructionState() != ConstructionState.BUILT)
+            return;
+        
         if (_target == null)
         {
             _enemiesInRange = Physics2D.OverlapCircleAll(transform.position, rangeRadius, enemyLayer);
