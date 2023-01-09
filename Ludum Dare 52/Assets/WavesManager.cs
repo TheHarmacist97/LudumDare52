@@ -19,7 +19,6 @@ public class WavesManager : MonoBehaviour
     {
         currentCount = startCount;
         delay = new WaitForSeconds(interSpawnDelay);
-        SpawnWrapper();
     }
 
     public void SpawnWrapper()
