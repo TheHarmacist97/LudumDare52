@@ -49,9 +49,7 @@ public class WavesManager : MonoBehaviour
         for (int i = 0; i < currentCount; i++)
         {
             Vector3 position = (Random.insideUnitCircle.normalized) * spawnRadius;
-            AIDestinationSetter ai = Instantiate(enemy, position, Quaternion.identity).GetComponent<AIDestinationSetter>();
-            ai.target = transform;
-            ai.transform.parent = transform;
+            Instantiate(enemy, position, Quaternion.identity);
             yield return delay;
         }
 

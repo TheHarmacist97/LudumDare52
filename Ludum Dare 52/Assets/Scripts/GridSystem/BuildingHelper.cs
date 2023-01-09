@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using CodeMonkey.Utils;
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class BuildingHelper : MonoBehaviour
@@ -11,7 +13,7 @@ public class BuildingHelper : MonoBehaviour
         SAMPLING
     }
     private States state = States.INACTIVE;
-
+    public List<Transform> turretPositions;
     private Building currentBuilding;
     private CraftableItemSO _currentCraftableItem;
     private CellObject currentCellObject;
@@ -25,6 +27,7 @@ public class BuildingHelper : MonoBehaviour
 
     void Start()
     {
+        turretPositions= new List<Transform>();
         grid = GridCreator.instance.grid;
     }
 
@@ -48,6 +51,7 @@ public class BuildingHelper : MonoBehaviour
         if (state == States.SAMPLING)
         {
             currentCellObject = grid.GetValue(currentMousePos);
+            if (currentCellObject == null) return;
             currentBuilding.transform.position = currentCellObject.transform.position;
 
             if (currentCellObject.occupied)
@@ -82,6 +86,7 @@ public class BuildingHelper : MonoBehaviour
                     InventoryManager.instance.RemoveFromInventory(requiredResource.resource, requiredResource.requiredAmount);
                 }
                 currentBuilding.transform.position = currentCellObject.transform.position;
+                turretPositions.Add(currentBuilding.transform);
                 currentBuilding.ChangeConstructionState(ConstructionState.BUILT);
                 currentCellObject.occupied = true;
                 state = States.INACTIVE;
@@ -94,6 +99,12 @@ public class BuildingHelper : MonoBehaviour
                 state = States.INACTIVE;
             }
         }
-
+    }
+    public Transform GetRandomTurret()
+    {
+        if (turretPositions.Count == 0)
+            return Ship.instance.transform;
+        
+        return turretPositions[UnityEngine.Random.Range(0, turretPositions.Count)];
     }
 }

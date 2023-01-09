@@ -285,7 +285,7 @@ GameObject:
   - component: {fileID: 5549279815570293534}
   - component: {fileID: -219651473577904422}
   - component: {fileID: -502433186130088176}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BasicTower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -412,7 +412,7 @@ MonoBehaviour:
   turretTransform: {fileID: 5549279815090668527}
   bulletPrefab: {fileID: 3179287604895016437, guid: 1550f5db326476148b5ef603c0115b2d, type: 3}
   bulletSpawnPosition: {fileID: 5549279814708457388}
-  fireRate: 0.1
+  fireRate: 1
   rangeRadius: 6.75
   enemyLayer:
     serializedVersion: 2

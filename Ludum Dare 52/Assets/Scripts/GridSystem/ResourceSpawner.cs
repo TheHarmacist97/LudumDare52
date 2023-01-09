@@ -11,12 +11,14 @@ public class ResourceSpawner : MonoBehaviour
     [SerializeField, Range(0,50f)] private float spawnRate;
 
     private GridSystem grid;
+    private List<CellObject> occupiedCells;
     Resource sessionPlanetResource;
     // Start is called before the first frame update
     void Start()
     {
         DayNightSystem.instance.onDayStartedEvent.AddListener(RepopulateResources);
         grid = GridCreator.instance.grid;
+        occupiedCells = new List<CellObject>();
     }
     private void Update()
     {
@@ -38,6 +40,7 @@ public class ResourceSpawner : MonoBehaviour
             {
                 cell.occupied = true;
                 Instantiate(RandomizeResource(), cell.transform.position, Quaternion.identity).transform.parent = transform;
+                occupiedCells.Add(cell);
             }
         }
     }
@@ -46,8 +49,10 @@ public class ResourceSpawner : MonoBehaviour
     {
         for (int i = 0; i < transform.childCount; i++)
         {
+            occupiedCells[i].occupied = false;
             Destroy(transform.GetChild(i).gameObject);
         }
+        occupiedCells.Clear();
     }
 
     public HarvestableResource RandomizeResource()

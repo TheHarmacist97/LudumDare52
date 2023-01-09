@@ -4,7 +4,18 @@ using UnityEngine;
 
 public class Ship : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public static Ship instance;
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this && instance != null)
+        {
+            Destroy(gameObject);
+        }
+    }
     void Start()
     {
         
