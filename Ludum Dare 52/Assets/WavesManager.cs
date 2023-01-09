@@ -1,4 +1,5 @@
 using Pathfinding;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,7 +19,7 @@ public class WavesManager : MonoBehaviour
     {
         currentCount = startCount;
         delay = new WaitForSeconds(interSpawnDelay);
-
+        SpawnWrapper();
     }
 
     public void SpawnWrapper()
@@ -30,7 +31,7 @@ public class WavesManager : MonoBehaviour
     {
         for (int i = 0; i < currentCount; i++)
         {
-            Vector3 position = Random.insideUnitSphere.normalized * spawnRadius;
+            Vector3 position = (UnityEngine.Random.insideUnitCircle.normalized)* spawnRadius;
             AIDestinationSetter ai = Instantiate(enemy, position, Quaternion.identity).GetComponent<AIDestinationSetter>();
             ai.target = transform;
             ai.transform.parent= transform;
