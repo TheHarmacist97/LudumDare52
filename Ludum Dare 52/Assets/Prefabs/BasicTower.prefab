@@ -284,10 +284,10 @@ GameObject:
   - component: {fileID: 8631739199518978465}
   - component: {fileID: 5549279815570293534}
   - component: {fileID: -219651473577904422}
-  - component: {fileID: -502433186130088176}
+  - component: {fileID: -4078683981765175013}
   m_Layer: 6
   m_Name: BasicTower
-  m_TagString: Untagged
+  m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -432,7 +432,7 @@ MonoBehaviour:
   size: {x: 0, y: 0}
   spriteRen: {fileID: 5549279815570293535}
   coll: {fileID: 8631739199518978465}
---- !u!114 &-502433186130088176
+--- !u!114 &-4078683981765175013
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -19,3 +19,6 @@ MonoBehaviour:
   - TutorialPanel
   - ControlsPanel
   - HomePanel
+  - PauseMenuPanel
+  - GameOverPanel
+  - GameWinPanel

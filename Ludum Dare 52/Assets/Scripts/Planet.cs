@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
+using TMPro;
 using UnityEngine;
 
 public class Planet : Hoverable
@@ -22,6 +24,7 @@ public class Planet : Hoverable
     [SerializeField] private int resourcePerHarvest = 10;
     [SerializeField] private int maxStoredAmount = 200;
     [SerializeField] private GameObject harvesterVisual;
+    [SerializeField] private TextMeshProUGUI planetInfoText;
 
     private int _harvestedAmount = 0;
     private float _harvestingTimer = 0f;
@@ -36,10 +39,17 @@ public class Planet : Hoverable
         _harvestProgressor = GetComponentInChildren<HarvestProgressor>();
         harvesterVisual.SetActive(false);
         _tooltipText = "Planet Name: <color=\"yellow\">" + planetName + "</color>\n" + "Primary Resource: <color=\"yellow\">" + excessResource.ItemName + "</color>";
+        planetInfoText.text = "";
+        transform.DOMove(new Vector3(transform.position.x, transform.position.y + 0.1f, transform.position.z), 2f)
+            .SetEase(Ease.InOutSine)
+            .SetLoops(-1, LoopType.Yoyo);
     }
 
     private void Update()
     {
+        if(_harvestedAmount > 0)
+            planetInfoText.text = "Resource ready to extract!";
+        
         if (_state == PlanetState.Harvesting)
         {
             // start harvesting
@@ -63,8 +73,6 @@ public class Planet : Hoverable
     {
         switch (_state)
         {
-            case PlanetState.Active:
-                return "<b>YOU ARE HERE</b>\n" + _tooltipText;
             case PlanetState.Harvestable:
                 string resourceText = "";
                 foreach (var requiredResource in requiredResources)
@@ -76,10 +84,6 @@ public class Planet : Hoverable
             case PlanetState.Harvesting:
                 return _tooltipText + "\nHarvester Details:\n<color=\"yellow\">" + _harvestedAmount + "</color> " + excessResource.ItemName +
                        " Harvested!\n<Left Click> To EXTRACT Harvested Resources";
-        }
-        if (PlanetManager.instance.SelectedPlanet == this)
-        {
-            return "<b>YOU ARE HERE</b>\n" + _tooltipText;
         }
         return _tooltipText;
     }
@@ -106,6 +110,7 @@ public class Planet : Hoverable
         {
             PlanetManager.instance.SelectPlanet(this);
             _state = PlanetState.Active;
+            planetInfoText.text = "You are here!";
             SceneSwitcher.instance.SwitchScene(SceneSwitcher.ScenesEnum.Planet);
         }
         else if (PlanetManager.instance.SelectedPlanet == this)

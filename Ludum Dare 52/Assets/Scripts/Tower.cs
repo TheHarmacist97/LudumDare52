@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using CodeMonkey.HealthSystemCM;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -19,17 +20,23 @@ public class Tower : MonoBehaviour
     private float _nextFire = 0f;
     private Collider2D[] _enemiesInRange;
     private Building _building;
+    private HealthSystem _healthSystem;
 
     private void Start()
     {
         _building = GetComponent<Building>();
+        _healthSystem = GetComponent<HealthSystemComponent>().GetHealthSystem();
+        _healthSystem.OnDead += OnDead;
+        //_healthSystem.OnHealthChanged += OnHealthChanged;
     }
 
     void Update()
     {
         if (_building.GetConstructionState() != ConstructionState.BUILT)
+        {
+            _healthSystem.HealComplete();
             return;
-        
+        }
         if (_target == null)
         {
             _enemiesInRange = Physics2D.OverlapCircleAll(transform.position, rangeRadius, enemyLayer);
@@ -52,6 +59,18 @@ public class Tower : MonoBehaviour
         
         //rotate the bullet as the gameobject
         newBullet.transform.right = turretTransform.right.normalized;
+    }
+
+    private void OnDead(object data, EventArgs args)
+    {
+        Destroy(gameObject);
+    }
+    private void OnHealthChanged(object data, EventArgs args)
+    {
+        if (_building.GetConstructionState() != ConstructionState.BUILT)
+        {
+            _healthSystem.HealComplete();
+        }
     }
 
     private Transform TargetRandomEnemy()

@@ -6,15 +6,22 @@ using UnityEngine.UI;
 
 public class MainMenuManager : MonoBehaviour
 {
-    public GameObject[] tutorialPanels;
+    public Transform tutorialPanelsHolder;
     public Button tutorialBackButton;
     public Button tutorialForwardButton;
 
     private int _tutorialCount;
     private int _currentTutorial;
+    private List<GameObject> tutorialPanels;
     private void Start()
     {
-        _tutorialCount = tutorialPanels.Length;
+        tutorialPanels = new List<GameObject>();
+        foreach (Transform trans in tutorialPanelsHolder)
+        {
+            tutorialPanels.Add(trans.gameObject);
+        }
+
+        _tutorialCount = tutorialPanels.Count;
         _currentTutorial = 0;
         EnableTutorialAtIndex(_currentTutorial);
         tutorialBackButton.onClick.AddListener(ShowPreviousTutorial);
@@ -43,7 +50,7 @@ public class MainMenuManager : MonoBehaviour
 
     private void EnableTutorialAtIndex(int index)
     {
-        for (int i = 0; i < tutorialPanels.Length; i++)
+        for (int i = 0; i < tutorialPanels.Count; i++)
         {
             if (i == index)
             {

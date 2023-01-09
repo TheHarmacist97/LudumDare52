@@ -19,6 +19,7 @@ public class DayNightSystem : MonoBehaviour
     [SerializeField] private GameObject timerPanel;
     [SerializeField] private GameObject timeUpPanel;
     [SerializeField] private TextMeshProUGUI timerText;
+    [SerializeField] private TextMeshProUGUI dayText;
     [Header("Events")] 
     public UnityEvent onDayStartedEvent;
     [SerializeField] private UnityEvent onNightStartedEvent;
@@ -26,6 +27,7 @@ public class DayNightSystem : MonoBehaviour
     private GamePhaseEnum _currentGamePhase;
     private bool _timerStarted = false;
     private float _dayTimer;
+    private int _currentDay = 0;
 
     private void Awake()
     {
@@ -68,7 +70,10 @@ public class DayNightSystem : MonoBehaviour
 
     public void InitiateDayTimer(float extraDelay=0f)
     {
+        ResetTimer();
         _currentGamePhase = GamePhaseEnum.Day;
+        _currentDay += 1;
+        dayText.text = "Day " + _currentDay;
         onDayStartedEvent.Invoke();
         _dayTimer = dayTimerMax;
         Invoke(nameof(StartTimer), startDelay+extraDelay);
@@ -78,6 +83,7 @@ public class DayNightSystem : MonoBehaviour
     {
         _timerStarted = true;
         timerPanel.SetActive(true);
+        timeUpPanel.SetActive(false);
     }
 
     public void StopTimer()
@@ -93,6 +99,7 @@ public class DayNightSystem : MonoBehaviour
     public void ResetTimer()
     {
         _dayTimer = dayTimerMax;
+        timerText.color = Color.white;
         timerPanel.SetActive(false);
         timeUpPanel.SetActive(false);
     }

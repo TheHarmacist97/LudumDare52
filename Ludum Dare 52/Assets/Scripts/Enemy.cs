@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] private float damageAmount;
     [SerializeField] private float chanceToTargetTurret;
     [SerializeField] private AIDestinationSetter ai;
     private HealthSystem _healthSystem;
@@ -21,7 +22,7 @@ public class Enemy : MonoBehaviour
         {
             ai.target = BuildingHelper.instance.GetRandomTurret();
         }
-
+        
         _healthSystem = GetComponent<HealthSystemComponent>().GetHealthSystem();
         _healthSystem.OnDead += OnDead;
     }
@@ -31,5 +32,15 @@ public class Enemy : MonoBehaviour
         WavesManager.instance.KillCounter();
         Debug.Log(gameObject.name + " died");
         Destroy(gameObject);
+    }
+
+    public AIDestinationSetter GetAI()
+    {
+        return ai;
+    }
+
+    public float GetDamageAmount()
+    {
+        return damageAmount;
     }
 }

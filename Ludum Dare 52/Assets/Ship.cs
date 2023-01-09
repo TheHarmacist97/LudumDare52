@@ -1,10 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using CodeMonkey.HealthSystemCM;
 using UnityEngine;
 
 public class Ship : MonoBehaviour
 {
     public static Ship instance;
+
+    private HealthSystem _healthSystem;
     private void Awake()
     {
         if (instance == null)
@@ -16,14 +20,18 @@ public class Ship : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        _healthSystem = GetComponent<HealthSystemComponent>().GetHealthSystem();
+        _healthSystem.OnDead += OnDead;
     }
+    
+    private void OnDead(object data, EventArgs args)
+    {
+        Destroy(gameObject);
+        GameManager.instance.ShowGameOver();
+    }
+    
+    
 }
