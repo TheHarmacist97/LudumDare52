@@ -41,6 +41,8 @@ public class DayNightSystem : MonoBehaviour
     private void Start()
     {
         ResetTimer();
+        WavesManager.instance.AllDeadEvent += InitiateDayTimer;
+
     }
 
     private void Update()
@@ -64,12 +66,12 @@ public class DayNightSystem : MonoBehaviour
         }
     }
 
-    public void InitiateDayTimer()
+    public void InitiateDayTimer(float extraDelay=0f)
     {
         _currentGamePhase = GamePhaseEnum.Day;
         onDayStartedEvent.Invoke();
         _dayTimer = dayTimerMax;
-        Invoke(nameof(StartTimer), startDelay);
+        Invoke(nameof(StartTimer), startDelay+extraDelay);
     }
 
     private void StartTimer()

@@ -1,18 +1,35 @@
 using Pathfinding;
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class WavesManager : MonoBehaviour
 {
+    public static WavesManager instance;
+
     [SerializeField] private Enemy enemy;
     [SerializeField] private int startCount;
     [SerializeField] private float percentageIncrease;
     [SerializeField] private float spawnRadius;
     [SerializeField] private float interSpawnDelay;
-    private int currentCount;
+
+    private static int currentCount;
+    private static int currentKills;
     private WaitForSeconds delay;
+    public delegate void AllDead(float delay);
+    public AllDead AllDeadEvent;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this && instance != null)
+        {
+            Destroy(gameObject);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +40,7 @@ public class WavesManager : MonoBehaviour
 
     public void SpawnWrapper()
     {
+        Debug.Log("SpawnWrapper is being called "+ currentCount);
         StartCoroutine(SpawnCoroutine());
     }
 
@@ -30,17 +48,24 @@ public class WavesManager : MonoBehaviour
     {
         for (int i = 0; i < currentCount; i++)
         {
-            Vector3 position = (UnityEngine.Random.insideUnitCircle.normalized)* spawnRadius;
+            Vector3 position = (Random.insideUnitCircle.normalized) * spawnRadius;
             AIDestinationSetter ai = Instantiate(enemy, position, Quaternion.identity).GetComponent<AIDestinationSetter>();
             ai.target = transform;
-            ai.transform.parent= transform;
+            ai.transform.parent = transform;
             yield return delay;
         }
-        currentCount += currentCount * (int)(100 + percentageIncrease / 100);
+
     }
-    // Update is called once per frame
-    void Update()
+
+    public void KillCounter()
     {
-        
+        currentKills++;
+        if(currentKills==currentCount)
+        {
+            currentKills = 0;
+            currentCount += currentCount * Mathf.CeilToInt((100 + percentageIncrease) / 100);
+            AllDeadEvent(0);
+        }
     }
+   
 }

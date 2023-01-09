@@ -9,6 +9,7 @@ public class GridCreator : MonoBehaviour
     [SerializeField] CellObject cellPrefab;
     [SerializeField] private int width, height;
     [SerializeField] private float cellSize;
+    [SerializeField] private int buildingSize;
     public GridSystem grid;
 
     private void Awake()
@@ -24,7 +25,7 @@ public class GridCreator : MonoBehaviour
 
         CellObject.cellSize = cellSize;
         transform.position = new Vector2(-(width / 2) * cellSize, -(height * cellSize / 2));
-        grid = new GridSystem(width, height, CellObject.cellSize, transform.position, InstantiateCell, false    );
+        grid = new GridSystem(width, height, CellObject.cellSize, transform.position, InstantiateCell, true, buildingSize);
     }
 
     // Start is called before the first frame update

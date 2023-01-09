@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour
 
     private void OnDead(object data, EventArgs args)
     {
+        WavesManager.instance.KillCounter();
         Debug.Log(gameObject.name + " died");
         Destroy(gameObject);
     }

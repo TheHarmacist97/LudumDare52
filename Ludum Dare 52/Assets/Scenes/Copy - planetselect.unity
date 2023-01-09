@@ -1173,6 +1173,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GridManager
       objectReference: {fileID: 0}
+    - target: {fileID: 8447713063350430458, guid: 2e937a46c246e894aa2387985538dbf0, type: 3}
+      propertyPath: buildingSize
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2726,7 +2730,7 @@ MonoBehaviour:
   manualDebugFloorRoof: 0
   showSearchTree: 0
   unwalkableNodeDebugSize: 0.3
-  logPathResults: 1
+  logPathResults: 0
   maxNearestNodeDistance: 100
   scanOnStartup: 1
   fullGetNearestSearch: 0
@@ -6932,7 +6936,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1020511649
 Transform:
   m_ObjectHideFlags: 0
@@ -14417,7 +14421,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1992293868}
         m_TargetAssemblyTypeName: DayNightSystem, Assembly-CSharp
         m_MethodName: InitiateDayTimer
-        m_Mode: 1
+        m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -16073,9 +16077,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 4257082606467829868, guid: 1a42bdde55edb3f4cb2cb0718db4e7f6, type: 3}
-  startCount: 30
+  startCount: 1
   percentageIncrease: 15
-  spawnRadius: 50
+  spawnRadius: 20
   interSpawnDelay: 0.25
 --- !u!1 &2143546190
 GameObject:

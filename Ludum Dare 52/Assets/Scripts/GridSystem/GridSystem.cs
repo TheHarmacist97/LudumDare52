@@ -5,12 +5,13 @@ public class GridSystem
 {
     public int width;
     public int height;
+    public int centralOccupance;
     public float cellSize;
     public bool debug;
     public CellObject[,] cellValues;
     public Vector2 origPos;
 
-    public GridSystem(int width, int height, float cellSize, Vector2 originPosition, Func<Vector2, CellObject> CreateCell, bool debug)
+    public GridSystem(int width, int height, float cellSize, Vector2 originPosition, Func<Vector2, CellObject> CreateCell, bool debug, int centralOccupance)
     {
         this.width = width;
         this.height = height;
@@ -24,6 +25,10 @@ public class GridSystem
             for (int j = 0; j < height; j++)
             {
                 cellValues[i, j] = CreateCell(GetWorldPosition(i, j));
+                if ((i >= width / 2 - centralOccupance && i < width / 2 + centralOccupance) && (j >= height / 2 - centralOccupance && j < height / 2 + centralOccupance))
+                {
+                    cellValues[i,j].occupied = true;
+                }
             }
         }
         if (debug)
@@ -40,6 +45,8 @@ public class GridSystem
             Debug.DrawLine(GetWorldPosition(0, height), GetWorldPosition(width, height), Color.red, 100f);
             Debug.DrawLine(GetWorldPosition(width, 0), GetWorldPosition(width, height), Color.cyan, 100f);
         }
+
+        this.centralOccupance = centralOccupance;
     }
 
     public Vector2 GetWorldPosition(int x, int y)
