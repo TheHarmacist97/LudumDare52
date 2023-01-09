@@ -15,8 +15,4 @@ MonoBehaviour:
   itemName: Tower
   itemSprite: {fileID: 21300010, guid: a1fbd1aaf76d0b94e88551b7c406ee2c, type: 3}
   itemPrefab: {fileID: -219651473577904422, guid: 2e91fb7f15d784845ab3a3b9a9a4ccb2, type: 3}
-  requiredResources:
-  - resource: {fileID: 11400000, guid: 8c7a35020978370478bebcda0f1f163e, type: 2}
-    requiredAmount: 10
-  - resource: {fileID: 11400000, guid: b102c25f631276e4b9609de758e2b320, type: 2}
-    requiredAmount: 30
+  requiredResources: []
