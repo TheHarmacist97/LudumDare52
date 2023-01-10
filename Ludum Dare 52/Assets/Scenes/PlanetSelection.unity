@@ -19846,7 +19846,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 899f642996c17f24b9452a31096ab96a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dayTimerMax: 5
+  dayTimerMax: 30
   startDelay: 5
   timerPanel: {fileID: 2037909075}
   timeUpPanel: {fileID: 2106565189}
