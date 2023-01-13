@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3d67ece197d9c574580885caf41b3903, type: 3}
-  m_Name: Copper
+  m_Name: Pyrolusite
   m_EditorClassIdentifier: 
-  ItemID: copper
+  ItemID: sodium
   TargetInventoryName: MainInventory
   ForceSlotIndex: 0
   TargetIndex: 0
@@ -32,11 +32,11 @@ MonoBehaviour:
     DisplayUseButton: 1
     DisplayUnequipButton: 1
   Quantity: 1
-  ItemName: Copper
-  ShortDescription: It's Copper
-  Description: It's Copper
-  Icon: {fileID: 21300000, guid: 678058abcbfe36f42902c11d9e5f64fc, type: 3}
-  Prefab: {fileID: 1766785643802516283, guid: b33f3eb29067d2648978936c781d1ebf, type: 3}
+  ItemName: Sodium
+  ShortDescription: It's Sodium
+  Description: It's Sodium
+  Icon: {fileID: 21300006, guid: 678058abcbfe36f42902c11d9e5f64fc, type: 3}
+  Prefab: {fileID: 1766785643802516283, guid: a081da63cd1b682439959b6c0db50964, type: 3}
   DropProperties:
     Shape: 0
     NormalToSpawnPlane: {x: 0, y: 1, z: 0}
@@ -89,4 +89,4 @@ MonoBehaviour:
   isInfiniteResource: 1
   maxResourceAmount: 100
   harvestTime: 1
-  resourcePerHarvest: 5
+  resourcePerHarvest: 15

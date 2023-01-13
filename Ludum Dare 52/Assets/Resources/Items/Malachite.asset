@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3d67ece197d9c574580885caf41b3903, type: 3}
-  m_Name: Sodium
+  m_Name: Malachite
   m_EditorClassIdentifier: 
-  ItemID: sodium
+  ItemID: coal
   TargetInventoryName: MainInventory
   ForceSlotIndex: 0
   TargetIndex: 0
@@ -32,11 +32,11 @@ MonoBehaviour:
     DisplayUseButton: 1
     DisplayUnequipButton: 1
   Quantity: 1
-  ItemName: Sodium
-  ShortDescription: It's Sodium
-  Description: It's Sodium
-  Icon: {fileID: 21300006, guid: 678058abcbfe36f42902c11d9e5f64fc, type: 3}
-  Prefab: {fileID: 1766785643802516283, guid: a081da63cd1b682439959b6c0db50964, type: 3}
+  ItemName: Coal
+  ShortDescription: It's Coal
+  Description: It's Coal
+  Icon: {fileID: 21300002, guid: 678058abcbfe36f42902c11d9e5f64fc, type: 3}
+  Prefab: {fileID: 1766785643802516283, guid: a10f09f9c44ea7c4eaadb1f9bd111da6, type: 3}
   DropProperties:
     Shape: 0
     NormalToSpawnPlane: {x: 0, y: 1, z: 0}
@@ -89,4 +89,4 @@ MonoBehaviour:
   isInfiniteResource: 1
   maxResourceAmount: 100
   harvestTime: 1
-  resourcePerHarvest: 15
+  resourcePerHarvest: 5

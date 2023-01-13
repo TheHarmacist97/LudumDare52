@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3d67ece197d9c574580885caf41b3903, type: 3}
-  m_Name: Coal
+  m_Name: Magnetite
   m_EditorClassIdentifier: 
-  ItemID: coal
+  ItemID: stone
   TargetInventoryName: MainInventory
   ForceSlotIndex: 0
   TargetIndex: 0
@@ -32,11 +32,11 @@ MonoBehaviour:
     DisplayUseButton: 1
     DisplayUnequipButton: 1
   Quantity: 1
-  ItemName: Coal
-  ShortDescription: It's Coal
-  Description: It's Coal
-  Icon: {fileID: 21300002, guid: 678058abcbfe36f42902c11d9e5f64fc, type: 3}
-  Prefab: {fileID: 1766785643802516283, guid: a10f09f9c44ea7c4eaadb1f9bd111da6, type: 3}
+  ItemName: Stone
+  ShortDescription: It's Stone
+  Description: It's Stone
+  Icon: {fileID: -1982627368618908731, guid: 678058abcbfe36f42902c11d9e5f64fc, type: 3}
+  Prefab: {fileID: 1766785643802516283, guid: 2b22a799a2c30754880b8f91643a7691, type: 3}
   DropProperties:
     Shape: 0
     NormalToSpawnPlane: {x: 0, y: 1, z: 0}
