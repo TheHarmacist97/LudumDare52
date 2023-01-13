@@ -409,10 +409,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b29dc8fd4f508c4b9d169b702a5ffa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cell: {fileID: 0}
   turretTransform: {fileID: 5549279815090668527}
   bulletPrefab: {fileID: 3179287604895016437, guid: 1550f5db326476148b5ef603c0115b2d, type: 3}
   bulletSpawnPosition: {fileID: 5549279814708457388}
-  fireRate: 1
+  fireRate: 0.2
   rangeRadius: 6.75
   enemyLayer:
     serializedVersion: 2

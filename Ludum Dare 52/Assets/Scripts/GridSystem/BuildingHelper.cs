@@ -17,7 +17,9 @@ public class BuildingHelper : MonoBehaviour
     private Building currentBuilding;
     private CraftableItemSO _currentCraftableItem;
     private CellObject currentCellObject;
-    GridSystem grid;
+    
+    private GridSystem grid;
+    private Vector2 currentMousePos;
 
     private void Awake()
     {
@@ -28,12 +30,13 @@ public class BuildingHelper : MonoBehaviour
     void Start()
     {
         turretPositions= new List<Transform>();
-        grid = GridCreator.instance.grid;
+        grid = GridCreator.grid;
     }
 
     
     void Update()
     {
+        currentMousePos = UtilsClass.GetMouseWorldPosition();
         StateLogic();
     }
 
@@ -47,7 +50,7 @@ public class BuildingHelper : MonoBehaviour
     private void StateLogic()
     {
         if (state == States.INACTIVE) return;
-        Vector2 currentMousePos = UtilsClass.GetMouseWorldPosition();
+        
         if (state == States.SAMPLING)
         {
             currentCellObject = grid.GetValue(currentMousePos);
@@ -67,7 +70,7 @@ public class BuildingHelper : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0) && !currentCellObject.occupied)
             {
-                //AstarPath.active.Scan();
+                AstarPath.active.Scan();
                 // Deduct resources from inventory
                 bool hasEnoughResources = true;
                 foreach (var requiredResource in _currentCraftableItem.requiredResources)
@@ -91,7 +94,7 @@ public class BuildingHelper : MonoBehaviour
                 currentCellObject.occupied = true;
                 state = States.INACTIVE;
             }
-            else if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
                 _currentCraftableItem = null;
                 Destroy(currentBuilding.gameObject);

@@ -17,7 +17,7 @@ public class ResourceSpawner : MonoBehaviour
     void Start()
     {
         DayNightSystem.instance.onDayStartedEvent.AddListener(RepopulateResources);
-        grid = GridCreator.instance.grid;
+        grid = GridCreator.grid;
         occupiedCells = new List<CellObject>();
     }
     private void Update()

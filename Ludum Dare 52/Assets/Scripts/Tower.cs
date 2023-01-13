@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using CodeMonkey.HealthSystemCM;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -63,6 +61,7 @@ public class Tower : MonoBehaviour
 
     private void OnDead(object data, EventArgs args)
     {
+        GridCreator.grid.GetValue(transform.position).occupied = false;
         Destroy(gameObject);
     }
     private void OnHealthChanged(object data, EventArgs args)

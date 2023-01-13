@@ -10,7 +10,7 @@ public class GridCreator : MonoBehaviour
     [SerializeField] private int width, height;
     [SerializeField] private float cellSize;
     [SerializeField] private int buildingSize;
-    public GridSystem grid;
+    public static GridSystem grid;
 
     private void Awake()
     {
